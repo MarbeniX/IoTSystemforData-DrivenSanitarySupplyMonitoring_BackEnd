@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema, Types } from "mongoose";
 
 enum SensorType {
     PAPER = "PAPER",
@@ -14,6 +14,7 @@ export interface ISensorRecord extends Document {
     timestamp: Date;
     waterActiveTime?: number;
     revolutions?: number;
+    bathroomLocationID: Types.ObjectId;
 }
 
 const SensorRecordSchema: Schema = new Schema({
@@ -36,6 +37,11 @@ const SensorRecordSchema: Schema = new Schema({
     },
     revolutions: {
         type: Number,
+    },
+    bathroomLocationID: {
+        type: Types.ObjectId,
+        ref: "BathroomLocation",
+        required: true,
     },
 });
 
