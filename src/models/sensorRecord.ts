@@ -10,11 +10,11 @@ enum SensorType {
 
 export interface ISensorRecord extends Document {
     sensorType: SensorType;
-    locationID: string;
     timestamp: Date;
     waterActiveTime?: number;
     revolutions?: number;
-    bathroomLocationID: Types.ObjectId;
+    // locationID: string;
+    // bathroomLocationID: Types.ObjectId;
 }
 
 const SensorRecordSchema: Schema = new Schema({
@@ -38,11 +38,11 @@ const SensorRecordSchema: Schema = new Schema({
     revolutions: {
         type: Number,
     },
-    bathroomLocationID: {
-        type: Types.ObjectId,
-        ref: "BathroomLocation",
-        required: true,
-    },
+    // bathroomLocationID: {
+    //     type: Types.ObjectId,
+    //     ref: "BathroomLocation",
+    //     required: true,
+    // },
 });
 
 const SensorRecord = mongoose.model<ISensorRecord>(
