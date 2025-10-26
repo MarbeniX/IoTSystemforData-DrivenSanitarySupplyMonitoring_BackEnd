@@ -1,25 +1,15 @@
 import SensorTypeConfig, {
+    ISensorTypeConfig,
     SensorTypeConfigData,
-} from "../models/sensorTypeConfig";
+} from "../models/sensorTypeConfig.model";
 
 export class SensorTypeConfigService {
-    static getConfig = async () => {
-        return await SensorTypeConfig.findOne({});
+    static getConfig = async (): Promise<ISensorTypeConfig> => {
+        return await SensorTypeConfig.getConfig();
     };
-
-    static createConfig = async (data: SensorTypeConfigData) => {
-        const newConfig = new SensorTypeConfig(data);
-        return await newConfig.save();
-    };
-
-    static updateConfig = async (updates: SensorTypeConfigData) => {
-        const updated = await SensorTypeConfig.findOneAndUpdate({}, updates, {
-            new: true,
-        });
-        return updated;
-    };
-
-    static deleteConfig = async () => {
-        return await SensorTypeConfig.findOneAndDelete({});
+    static updateConfig = async (data: Partial<SensorTypeConfigData>) => {
+        const config = await SensorTypeConfig.getConfig();
+        Object.assign(config, data);
+        return await config.save();
     };
 }
