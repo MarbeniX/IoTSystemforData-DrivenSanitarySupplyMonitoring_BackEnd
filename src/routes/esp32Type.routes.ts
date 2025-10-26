@@ -6,10 +6,10 @@ import { alertMessageValues, espTypeValues } from "../models/esp32Alerts.model";
 
 const router = Router();
 
-router.get("/alerts", ESP32TypeController.getAlerts);
+router.get("/", ESP32TypeController.getAlerts);
 
 router.patch(
-    "/alerts",
+    "/",
     body("espType").isInt().isIn(espTypeValues).notEmpty(),
     body("alertMessage").isInt().isIn(alertMessageValues).notEmpty(),
     handleInputErrors,

@@ -1,4 +1,4 @@
-import mongoose, { Document, Model, Schema } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
 export enum SensorType {
     PAPER = 0,
@@ -13,16 +13,16 @@ const sensorTypeValues = Object.values(SensorType).filter(
 ) as number[];
 
 export interface ISensorRecord extends Document {
-    sensorType: SensorType;
+    id: SensorType;
     timestamp: Date;
-    waterActiveTime?: number;
+    seconds?: number;
     revolutions?: number;
 }
 
 export type SensorRecordData = Omit<ISensorRecord, keyof Document>;
 
 const SensorRecordSchema: Schema = new Schema({
-    sensorType: {
+    id: {
         type: Number,
         enum: sensorTypeValues,
         required: true,
@@ -32,7 +32,7 @@ const SensorRecordSchema: Schema = new Schema({
         required: true,
         default: Date.now,
     },
-    waterActiveTime: {
+    seconds: {
         type: Number,
     },
     revolutions: {

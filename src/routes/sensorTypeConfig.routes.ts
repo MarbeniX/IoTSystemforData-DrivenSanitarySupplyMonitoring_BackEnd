@@ -5,10 +5,10 @@ import { SensorTypeConfigController } from "../controllers/sensorTypeConfig.cont
 
 const router = Router();
 
-router.get("/sensor-type-config", SensorTypeConfigController.getConfig);
+router.get("/", SensorTypeConfigController.getConfig);
 
 router.patch(
-    "/sensor-type-config",
+    "/",
     body("soapCapacity").isNumeric().optional(),
     body("soapDispensePerUse").isNumeric().optional(),
     body("tankFlushCapacity").isNumeric().optional(),
