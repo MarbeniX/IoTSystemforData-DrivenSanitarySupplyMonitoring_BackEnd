@@ -15,30 +15,30 @@ export class RecordsService {
         const recordsToInsert: SensorRecordData[] = parsedRows
             .map((row) => {
                 try {
-                    const id = parseInt(row.id, 10);
-                    const timestamp = new Date(parseInt(row.time, 10) * 1000);
-                    const seconds = parseInt(row.sec, 10);
+                    const sensorType = parseInt(row.id, 10);
+                    const isoString = `${row.date}T${row.time}`;
+                    const timestamp = new Date(isoString);
+                    const waterActiveTime = parseInt(row.sec, 10);
                     const revolutions = parseInt(row.rev, 10);
 
-                    if (isNaN(id) || isNaN(timestamp.getTime())) {
+                    if (isNaN(sensorType) || isNaN(timestamp.getTime())) {
                         console.warn(
-                            "Invalid id or timestamp, skipping row:",
+                            "Invalid sensorType or timestamp, skipping row:",
                             row
                         );
                         return null;
                     }
 
                     const record: Partial<ISensorRecord> = {
-                        id: id,
-                        timestamp,
+                        id: sensorType,
+                        timestamp: timestamp,
                     };
-                    if (!isNaN(seconds)) {
-                        record.seconds = seconds;
+                    if (!isNaN(waterActiveTime) && waterActiveTime > 0) {
+                        record.seconds = waterActiveTime;
                     }
-                    if (!isNaN(revolutions)) {
+                    if (!isNaN(revolutions) && revolutions > 0) {
                         record.revolutions = revolutions;
                     }
-
                     return record as SensorRecordData;
                 } catch (e) {
                     console.warn("Error parsing row, skipping:", row, e);
