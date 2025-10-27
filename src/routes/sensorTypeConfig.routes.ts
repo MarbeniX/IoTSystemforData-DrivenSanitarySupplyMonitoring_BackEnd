@@ -9,12 +9,30 @@ router.get("/", SensorTypeConfigController.getConfig);
 
 router.patch(
     "/",
-    body("soapCapacity").isNumeric().optional(),
-    body("soapDispensePerUse").isNumeric().optional(),
-    body("tankFlushCapacity").isNumeric().optional(),
-    body("totalTowelLength").isNumeric().optional(),
-    body("towelLengthPerUse").isNumeric().optional(),
-    body("watterPressure").isNumeric().optional(),
+    body("soapCapacity")
+        .isNumeric()
+        .withMessage("Must be a numeric value")
+        .optional(),
+    body("soapDispensePerUse")
+        .isNumeric()
+        .withMessage("Must be a numeric value")
+        .optional(),
+    body("tankFlushCapacity")
+        .isNumeric()
+        .withMessage("Must be a numeric value")
+        .optional(),
+    body("totalTowelLength")
+        .isNumeric()
+        .withMessage("Must be a numeric value")
+        .optional(),
+    body("towelLengthPerUse")
+        .isNumeric()
+        .withMessage("Must be a numeric value")
+        .optional(),
+    body("watterPressure")
+        .isNumeric()
+        .withMessage("Must be a numeric value")
+        .optional(),
     handleInputErrors,
     SensorTypeConfigController.updateConfig
 );

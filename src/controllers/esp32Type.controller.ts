@@ -3,7 +3,7 @@ import { ESP32TypeService } from "../services/esp32Type.service";
 import { ESP32AlertData } from "../models/esp32Alerts.model";
 
 export class ESP32TypeController {
-    static getAlerts = async (res: Response) => {
+    static getAlerts = async (req: Request, res: Response) => {
         try {
             const alerts = await ESP32TypeService.getAlerts();
             res.status(200).json({

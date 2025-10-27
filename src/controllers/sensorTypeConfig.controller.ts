@@ -3,7 +3,7 @@ import { SensorTypeConfigData } from "../models/sensorTypeConfig.model";
 import { SensorTypeConfigService } from "../services/sensorTypeConfig.service";
 
 export class SensorTypeConfigController {
-    static getConfig = async (res: Response) => {
+    static getConfig = async (req: Request, res: Response) => {
         try {
             const config = await SensorTypeConfigService.getConfig();
             res.status(200).json({
@@ -11,6 +11,7 @@ export class SensorTypeConfigController {
                 data: config,
             });
         } catch (error) {
+            console.log(error);
             res.status(500).json({ message: "Internal server error" });
         }
     };

@@ -16,4 +16,4 @@ router.patch(
     ESP32TypeController.updateAlert
 );
 
-export default Router;
+export default router;
