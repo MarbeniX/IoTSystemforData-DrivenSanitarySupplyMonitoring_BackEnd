@@ -1,8 +1,8 @@
 import ESP32Alert, {
     ESP32AlertData,
-    ESPType,
     IESP32Alert,
 } from "../models/esp32Alerts.model";
+import { ESPType } from "../interfaces";
 
 export class ESP32TypeService {
     static getAlerts = async (): Promise<IESP32Alert[]> => {

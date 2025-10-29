@@ -1,14 +1,5 @@
 import mongoose, { Document, Model, Schema, Types } from "mongoose";
-import { SensorType } from "./sensorRecord.model";
-
-export enum ESPType {
-    PAPER = SensorType.PAPER,
-    TANK = SensorType.TANK,
-    SOAP = SensorType.SOAP,
-    WATER = SensorType.WATER,
-    TOWEL = SensorType.TOWEL,
-    MASTER = 5,
-}
+import { ESPType, SensorType } from "../interfaces";
 
 export enum AlertMessage {
     ACTIVE = 0,

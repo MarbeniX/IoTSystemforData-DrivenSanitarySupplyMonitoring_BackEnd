@@ -1,19 +1,8 @@
 import mongoose, { Document, Schema } from "mongoose";
-
-export enum SensorType {
-    PAPER = 0,
-    TANK = 1,
-    SOAP = 2,
-    WATER = 3,
-    TOWEL = 4,
-}
-
-const sensorTypeValues = Object.values(SensorType).filter(
-    (value) => typeof value === "number"
-) as number[];
+import { SensorType, sensorTypeValues } from "../interfaces";
 
 export interface ISensorRecord extends Document {
-    id: SensorType;
+    sensorType: SensorType;
     timestamp: Date;
     seconds?: number;
     revolutions?: number;
@@ -22,7 +11,7 @@ export interface ISensorRecord extends Document {
 export type SensorRecordData = Omit<ISensorRecord, keyof Document>;
 
 const SensorRecordSchema: Schema = new Schema({
-    id: {
+    sensorType: {
         type: Number,
         enum: sensorTypeValues,
         required: true,
