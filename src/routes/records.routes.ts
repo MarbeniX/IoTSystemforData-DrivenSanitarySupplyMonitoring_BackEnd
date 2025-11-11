@@ -73,12 +73,18 @@ router.get(
         .withMessage("Minimun year is 2025")
         .optional(),
     query().custom((value, { req }) => {
+        const providedKeys = ["day", "month", "year"].filter((k) => {
+            const v = req.query[k];
+            if (v === undefined) return false;
+            if (Array.isArray(v))
+                return v.some((item) => String(item).trim() !== "");
+            return String(v).trim() !== "";
+        });
         if (!req.query.month && !req.query.year && !req.query.day) {
             throw new Error(
                 "At least one of 'day', 'month' or 'year' is required"
             );
-        }
-        if (req.query.day && req.query.month && req.query.year) {
+        } else if (providedKeys.length > 1) {
             throw new Error(
                 "Only one of 'day', 'month' or 'year' should be provided"
             );
