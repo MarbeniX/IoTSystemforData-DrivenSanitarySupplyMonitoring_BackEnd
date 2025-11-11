@@ -24,10 +24,7 @@ router.get(
     "/today-soap-towel-summary",
     RecordsController.getTodaySoapAndTowelSummary
 );
-router.get(
-    "/get-todal-soap-towel-summary",
-    RecordsController.getTodaySoapAndTowelSummary
-);
+
 router.get(
     "/latest-records",
     query("limit", "Limit must be an integer of at least 10")
@@ -48,7 +45,10 @@ router.get(
     query("month", "Month format must be YYYY-MM")
         .matches(/^\d{4}-\d{2}$/)
         .optional(),
-    query("year", "Year format must be YYYY").isInt({ min: 2025 }).optional(),
+    query("year", "Year format must be YYYY")
+        .isInt({ min: 2025 })
+        .withMessage("Minimun year is 2025")
+        .optional(),
     query().custom((value, { req }) => {
         if (!req.query.month && !req.query.year) {
             throw new Error("At least one of 'month' or 'year' is required");
@@ -63,12 +63,15 @@ router.get(
 );
 
 router.get(
-    "/day-monty-or-year-supplies-records",
+    "/day-month-or-year-supplies-records",
     query("day", "Day format must be YYYY-MM-DD").optional().isISO8601(),
     query("month", "Month format must be YYYY-MM")
         .matches(/^\d{4}-\d{2}$/)
         .optional(),
-    query("year", "Year format must be YYYY").isInt({ min: 2025 }).optional(),
+    query("year", "Year format must be YYYY")
+        .isInt({ min: 2025 })
+        .withMessage("Minimun year is 2025")
+        .optional(),
     query().custom((value, { req }) => {
         if (!req.query.month && !req.query.year && !req.query.day) {
             throw new Error(

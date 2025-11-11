@@ -94,7 +94,10 @@ export class RecordsController {
                 );
             res.status(200).json({ message: "Supplies Records", result });
         } catch (error) {
-            res.status(500).json({ message: "Server Error", error });
+            res.status(500).json({
+                message: "Server Error",
+                error: error.message,
+            });
         }
     };
 }

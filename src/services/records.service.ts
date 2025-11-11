@@ -179,7 +179,7 @@ export class RecordsService {
             },
         ];
 
-        const summary = await SensorRecord.aggregate(pipeline as any[]);
+        const summary = await SensorRecord.aggregate(pipeline);
         let soapCount = 0;
         let towelCount = 0;
         for (const result of summary) {
@@ -413,9 +413,9 @@ export class RecordsService {
     static getSuppliesRecordsByDayOrMonthOrYear = async (
         query: IQueryOptions
     ) => {
-        const { $match } = this.calculateDateRange(query);
-        const pipeline: any[] = [
-            $match,
+        const $matchStage = this.calculateDateRange(query);
+        const pipeline = [
+            $matchStage,
             {
                 $group: {
                     _id: "$sensorType",
@@ -514,6 +514,9 @@ export class RecordsService {
             } else {
                 return { $match: {} };
             }
+            return {
+                $match: { timestamp: { $gte: startDate, $lte: endDate } },
+            };
         } catch (error) {
             return { $match: { _id: new mongoose.Types.ObjectId() } };
         }
