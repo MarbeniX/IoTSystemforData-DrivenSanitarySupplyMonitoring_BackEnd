@@ -21,6 +21,18 @@ export interface IHistoricRecordSummary {
     totalSeconds?: number;
 }
 
+export interface IQueryOptions {
+    day?: string;
+    month?: string;
+    year?: string;
+}
+
+export interface IChartQueryOptions {
+    supplyType: number;
+    month?: string;
+    year?: string;
+}
+
 export const sensorTypeValues = Object.values(SensorType).filter(
     (value) => typeof value === "number"
 ) as number[];
