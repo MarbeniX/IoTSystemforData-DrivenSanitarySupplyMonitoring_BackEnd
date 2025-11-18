@@ -16,8 +16,8 @@ app.use(cors(corsConfig));
 app.use(morgan("dev"));
 app.use(express.json());
 
-app.use("/api/esp32Type", esp32TypeRoutes);
-app.use("/api/sensorTypeConfig", sensorTypeConfigRoutes);
-app.use("/api/records", recordsRoutes);
+app.use("/esp32Type", esp32TypeRoutes);
+app.use("/sensorTypeConfig", sensorTypeConfigRoutes);
+app.use("/records", recordsRoutes);
 
 export default app;
