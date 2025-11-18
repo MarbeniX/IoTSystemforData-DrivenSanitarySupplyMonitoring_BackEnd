@@ -30,7 +30,7 @@
     "main": "index.js",
     "scripts": {
         "dev": "nodemon src/index.ts",
-        "build": "tsc"
+        "build": "tsc && vite build"
     },
     "repository": {
         "type": "git",
