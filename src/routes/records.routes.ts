@@ -95,4 +95,9 @@ router.get(
     RecordsController.getSuppliesRecordsByDayOrMonthOrYear
 );
 
+router.get(
+    "/oldest-record-timestamp",
+    RecordsController.getLatestRecordTimestamp
+);
+
 export default router;

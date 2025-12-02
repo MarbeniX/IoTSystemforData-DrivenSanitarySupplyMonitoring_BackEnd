@@ -26,19 +26,22 @@ export interface IESP32AlertModel extends Model<IESP32Alert> {
 
 export type ESP32AlertData = Omit<IESP32Alert, keyof Document>;
 
-const ESP32AlertSchema: Schema<IESP32Alert, IESP32AlertModel> = new Schema({
-    espType: {
-        type: Number,
-        enum: espTypeValues,
-        required: true,
-        unique: true,
+const ESP32AlertSchema: Schema<IESP32Alert, IESP32AlertModel> = new Schema(
+    {
+        espType: {
+            type: Number,
+            enum: espTypeValues,
+            required: true,
+            unique: true,
+        },
+        alertMessage: {
+            type: Number,
+            required: true,
+            default: 0,
+        },
     },
-    alertMessage: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
-});
+    { timestamps: true }
+);
 
 ESP32AlertSchema.statics.getAlert = async function (
     espType: ESPType

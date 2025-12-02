@@ -100,4 +100,16 @@ export class RecordsController {
             });
         }
     };
+
+    static getLatestRecordTimestamp = async (req: Request, res: Response) => {
+        try {
+            const result = await RecordsService.getLatestRecordTimestamp();
+            res.status(200).json({
+                message: "Latest Record Timestamp",
+                result,
+            });
+        } catch (error) {
+            res.status(500).json({ message: "Server Error", error });
+        }
+    };
 }

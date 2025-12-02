@@ -521,4 +521,12 @@ export class RecordsService {
             return { $match: { _id: new mongoose.Types.ObjectId() } };
         }
     };
+
+    static getLatestRecordTimestamp = async (): Promise<Date> => {
+        const oldestRecord = await SensorRecord.findOne({})
+            .sort({ timestamp: 1 })
+            .select("timestamp")
+            .exec();
+        return oldestRecord ? oldestRecord.timestamp : null;
+    };
 }
